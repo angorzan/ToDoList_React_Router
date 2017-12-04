@@ -1,14 +1,14 @@
 import React from 'react';
 import ToDoItem from './toDoItem.jsx'
-import ToDoList from "./toDoList.jsx";
 
 class TasksToDo extends React.Component {
     render() {
-        const tasksTodo = [];
+        const tasksTodo = this.props.route.tasksTodo;
         console.log('Tasks to do: ' + tasksTodo);
         const listOfToDo = tasksTodo.map((item, i) => {
             return (
-                <ToDoItem item={item} key={i} index={i} />
+                <ToDoItem item={item} key={i} index={i} removeTask={this.props.route.removeTask}
+                          completeTask={this.props.route.completeTask}/>
             )
         });
         return (

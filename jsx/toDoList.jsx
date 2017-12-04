@@ -1,8 +1,16 @@
 import React from 'react';
+import {
+    Router,
+    Route,
+    Link,
+    IndexLink,
+    IndexRoute,
+    hashHistory
+} from 'react-router';
 import TaksToAdd from "./tasksToAdd.jsx";
 import TasksToDo from "./tasksToDo.jsx";
 import TasksDone from "./tasksDone.jsx";
-
+import NotFound from "./notFound.jsx";
 
 
 class ToDoList extends React.Component {
@@ -49,13 +57,15 @@ class ToDoList extends React.Component {
     render() {
 
         return (
-            <div className="form-group">
-
-                <TaksToAdd addTask={this.addTask}/>
-                <TasksToDo tasksTodo={this.state.tasksTodo} removeTask={this.removeTask}
-                           completeTask={this.completeTask}/>
-                <TasksDone tasksDone={this.state.tasksDone} removeDone={this.removeDone}/>
-            </div>
+            <Router history={hashHistory}>
+                <Route path='/' component={TaksToAdd} addTask={this.addTask}>
+                    <Route path='/todo' component={TasksToDo} tasksTodo={this.state.tasksTodo}
+                           removeTask={this.removeTask} completeTask={this.completeTask}/>
+                    <Route path='/done' component={TasksDone} tasksDone={this.state.tasksDone}
+                           removeDone={this.removeDone}/>
+                    <Route path='*' component={NotFound}/>
+                </Route>
+            </Router>
         )
     }
 }

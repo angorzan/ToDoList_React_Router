@@ -10078,21 +10078,9 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouter = __webpack_require__(222);
 
-var _tasksToAdd = __webpack_require__(249);
+var _toDoList = __webpack_require__(256);
 
-var _tasksToAdd2 = _interopRequireDefault(_tasksToAdd);
-
-var _tasksToDo = __webpack_require__(251);
-
-var _tasksToDo2 = _interopRequireDefault(_tasksToDo);
-
-var _tasksDone = __webpack_require__(252);
-
-var _tasksDone2 = _interopRequireDefault(_tasksDone);
-
-var _notFound = __webpack_require__(253);
-
-var _notFound2 = _interopRequireDefault(_notFound);
+var _toDoList2 = _interopRequireDefault(_toDoList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10117,17 +10105,7 @@ document.addEventListener('DOMContentLoaded', function () {
         _createClass(App, [{
             key: 'render',
             value: function render() {
-                return _react2.default.createElement(
-                    _reactRouter.Router,
-                    { history: _reactRouter.hashHistory },
-                    _react2.default.createElement(
-                        _reactRouter.Route,
-                        { path: '/', component: _tasksToAdd2.default },
-                        _react2.default.createElement(_reactRouter.Route, { path: '/todo', component: _tasksToDo2.default }),
-                        _react2.default.createElement(_reactRouter.Route, { path: '/done', component: _tasksDone2.default }),
-                        _react2.default.createElement(_reactRouter.Route, { path: '*', component: _notFound2.default })
-                    )
-                );
+                return _react2.default.createElement(_toDoList2.default, null);
             }
         }]);
 
@@ -27604,7 +27582,7 @@ var TaksToAdd = function (_React$Component) {
         _this.handleClickAdd = function () {
             console.log('Task added');
             console.log('New task: ' + _this.state.newtask);
-            _this.props.addTask(_this.state.newtask);
+            _this.props.route.addTask(_this.state.newtask);
         };
 
         _this.state = {
@@ -27734,10 +27712,6 @@ var _toDoItem = __webpack_require__(255);
 
 var _toDoItem2 = _interopRequireDefault(_toDoItem);
 
-var _toDoList = __webpack_require__(256);
-
-var _toDoList2 = _interopRequireDefault(_toDoList);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27758,10 +27732,13 @@ var TasksToDo = function (_React$Component) {
     _createClass(TasksToDo, [{
         key: 'render',
         value: function render() {
-            var tasksTodo = [];
+            var _this2 = this;
+
+            var tasksTodo = this.props.route.tasksTodo;
             console.log('Tasks to do: ' + tasksTodo);
             var listOfToDo = tasksTodo.map(function (item, i) {
-                return _react2.default.createElement(_toDoItem2.default, { item: item, key: i, index: i });
+                return _react2.default.createElement(_toDoItem2.default, { item: item, key: i, index: i, removeTask: _this2.props.route.removeTask,
+                    completeTask: _this2.props.route.completeTask });
             });
             return _react2.default.createElement(
                 'div',
@@ -27810,10 +27787,6 @@ var _doneItem = __webpack_require__(254);
 
 var _doneItem2 = _interopRequireDefault(_doneItem);
 
-var _toDoList = __webpack_require__(256);
-
-var _toDoList2 = _interopRequireDefault(_toDoList);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27834,10 +27807,12 @@ var TasksDone = function (_React$Component) {
     _createClass(TasksDone, [{
         key: 'render',
         value: function render() {
-            var tasksDone = [];
+            var _this2 = this;
+
+            var tasksDone = this.props.route.tasksDone;
             console.log('Tasks done: ' + tasksDone);
             var listOfDone = tasksDone.map(function (item, i) {
-                return _react2.default.createElement(_doneItem2.default, { item: item, key: i, index: i });
+                return _react2.default.createElement(_doneItem2.default, { item: item, key: i, index: i, removeDone: _this2.props.route.removeDone });
             });
             return _react2.default.createElement(
                 'div',
@@ -28071,6 +28046,8 @@ var _react = __webpack_require__(84);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouter = __webpack_require__(222);
+
 var _tasksToAdd = __webpack_require__(249);
 
 var _tasksToAdd2 = _interopRequireDefault(_tasksToAdd);
@@ -28082,6 +28059,10 @@ var _tasksToDo2 = _interopRequireDefault(_tasksToDo);
 var _tasksDone = __webpack_require__(252);
 
 var _tasksDone2 = _interopRequireDefault(_tasksDone);
+
+var _notFound = __webpack_require__(253);
+
+var _notFound2 = _interopRequireDefault(_notFound);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28138,16 +28119,21 @@ var ToDoList = function (_React$Component) {
     }
 
     _createClass(ToDoList, [{
-        key: "render",
+        key: 'render',
         value: function render() {
 
             return _react2.default.createElement(
-                "div",
-                { className: "form-group" },
-                _react2.default.createElement(_tasksToAdd2.default, { addTask: this.addTask }),
-                _react2.default.createElement(_tasksToDo2.default, { tasksTodo: this.state.tasksTodo, removeTask: this.removeTask,
-                    completeTask: this.completeTask }),
-                _react2.default.createElement(_tasksDone2.default, { tasksDone: this.state.tasksDone, removeDone: this.removeDone })
+                _reactRouter.Router,
+                { history: _reactRouter.hashHistory },
+                _react2.default.createElement(
+                    _reactRouter.Route,
+                    { path: '/', component: _tasksToAdd2.default, addTask: this.addTask },
+                    _react2.default.createElement(_reactRouter.Route, { path: '/todo', component: _tasksToDo2.default, tasksTodo: this.state.tasksTodo,
+                        removeTask: this.removeTask, completeTask: this.completeTask }),
+                    _react2.default.createElement(_reactRouter.Route, { path: '/done', component: _tasksDone2.default, tasksDone: this.state.tasksDone,
+                        removeDone: this.removeDone }),
+                    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _notFound2.default })
+                )
             );
         }
     }]);

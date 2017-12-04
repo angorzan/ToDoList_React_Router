@@ -1,17 +1,16 @@
 import React from 'react';
 import DoneItem from './doneItem.jsx'
-import ToDoList from "./toDoList.jsx";
 
 
 class TasksDone extends React.Component {
 
 
     render() {
-        const tasksDone = [];
+        const tasksDone = this.props.route.tasksDone;
         console.log('Tasks done: ' + tasksDone);
         const listOfDone = tasksDone.map((item, i) => {
             return (
-                <DoneItem item={item} key={i} index={i} />
+                <DoneItem item={item} key={i} index={i} removeDone={this.props.route.removeDone}/>
             )
         });
         return (
@@ -28,10 +27,6 @@ class TasksDone extends React.Component {
         )
     }
 }
-
-
-
-
 
 
 module.exports = TasksDone;

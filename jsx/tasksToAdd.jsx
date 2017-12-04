@@ -25,7 +25,7 @@ class TaksToAdd extends React.Component {
     handleClickAdd = () => {
         console.log('Task added');
         console.log('New task: ' + this.state.newtask);
-        this.props.addTask(this.state.newtask);
+        this.props.route.addTask(this.state.newtask);
 
     };
 

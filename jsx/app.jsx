@@ -8,10 +8,7 @@ import {
     IndexRoute,
     hashHistory
 } from 'react-router';
-import TaksToAdd from "./tasksToAdd.jsx";
-import TasksToDo from "./tasksToDo.jsx";
-import TasksDone from "./tasksDone.jsx";
-import NotFound from "./notFound.jsx";
+import ToDoList from "./toDoList.jsx";
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -21,14 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     class App extends React.Component {
         render() {
             return (
-                <Router history={hashHistory}>
-                    <Route path='/' component={TaksToAdd}>
-                        <Route path='/todo' component={TasksToDo}/>
-                        <Route path='/done' component={TasksDone}/>
-                        <Route path='*' component={NotFound} />
-                    </Route>
-                </Router>
-
+                <ToDoList />
             )
 
         }
