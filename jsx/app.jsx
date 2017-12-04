@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         render() {
             console.log('Render input');
-
+            const activeLink = {fontWeight: "bold"};
             return (
                 <div>
                     <div className="container form-group">
@@ -53,8 +53,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     <button className="addTaskButton btn btn-primary" onClick={this.handleClickAdd}>Add task</button>
                     <ul>
-                        <li><Link to="/todo">To do</Link></li>
-                        <li><Link to="/done">Done </Link></li>
+                        <li><IndexLink to="/todo" activeStyle={activeLink}>To do</IndexLink></li>
+                        <li><IndexLink to="/done" activeStyle={activeLink}>Done </IndexLink></li>
                     </ul>
                     </div>
                     { this.props.children }
@@ -209,7 +209,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     class NotFound extends React.Component {
         render() {
-            return <p>Nie znaleziono wróc do <Link to="/">strony głównej</Link></p>
+            return <div className="container">
+                        <p>Unfortunately nothing was found. Back to <Link to="/">adding tasks</Link></p>
+                    </div>
         }
     }
 

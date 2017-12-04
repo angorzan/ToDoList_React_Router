@@ -10143,7 +10143,7 @@ document.addEventListener('DOMContentLoaded', function () {
             key: 'render',
             value: function render() {
                 console.log('Render input');
-
+                var activeLink = { fontWeight: "bold" };
                 return _react2.default.createElement(
                     'div',
                     null,
@@ -10170,8 +10170,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 'li',
                                 null,
                                 _react2.default.createElement(
-                                    _reactRouter.Link,
-                                    { to: '/todo' },
+                                    _reactRouter.IndexLink,
+                                    { to: '/todo', activeStyle: activeLink },
                                     'To do'
                                 )
                             ),
@@ -10179,8 +10179,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 'li',
                                 null,
                                 _react2.default.createElement(
-                                    _reactRouter.Link,
-                                    { to: '/done' },
+                                    _reactRouter.IndexLink,
+                                    { to: '/done', activeStyle: activeLink },
                                     'Done '
                                 )
                             )
@@ -10447,13 +10447,17 @@ document.addEventListener('DOMContentLoaded', function () {
             key: 'render',
             value: function render() {
                 return _react2.default.createElement(
-                    'p',
-                    null,
-                    'Nie znaleziono wr\xF3c do ',
+                    'div',
+                    { className: 'container' },
                     _react2.default.createElement(
-                        _reactRouter.Link,
-                        { to: '/' },
-                        'strony g\u0142\xF3wnej'
+                        'p',
+                        null,
+                        'Unfortunately nothing was found. Back to ',
+                        _react2.default.createElement(
+                            _reactRouter.Link,
+                            { to: '/' },
+                            'adding tasks'
+                        )
                     )
                 );
             }
