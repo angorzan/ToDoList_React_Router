@@ -10450,7 +10450,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     'div',
                     { className: 'container' },
                     _react2.default.createElement(
-                        'p',
+                        'h1',
                         null,
                         'Unfortunately nothing was found. Back to ',
                         _react2.default.createElement(

@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
     class NotFound extends React.Component {
         render() {
             return <div className="container">
-                        <p>Unfortunately nothing was found. Back to <Link to="/">adding tasks</Link></p>
+                        <h1>Unfortunately nothing was found. Back to <Link to="/">adding tasks</Link></h1>
                     </div>
         }
     }
@@ -223,9 +223,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         <Route path='/todo' component={TasksToDo}/>
                         <Route path='/done' component={TasksDone}/>
                         <Route path='*' component={NotFound} />
-
                     </Route>
                 </Router>
+
             )
 
         }
