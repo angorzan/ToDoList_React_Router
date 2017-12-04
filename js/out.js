@@ -10143,7 +10143,7 @@ document.addEventListener('DOMContentLoaded', function () {
             key: 'render',
             value: function render() {
                 console.log('Render input');
-                var activeLink = { fontWeight: "bold" };
+                var activeLink = { fontWeight: "bold", color: "green", fontStyle: "italic" };
                 return _react2.default.createElement(
                     'div',
                     null,

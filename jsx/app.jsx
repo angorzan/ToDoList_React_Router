@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         render() {
             console.log('Render input');
-            const activeLink = {fontWeight: "bold"};
+            const activeLink = {fontWeight: "bold", color: "green", fontStyle: "italic"};
             return (
                 <div>
                     <div className="container form-group">
