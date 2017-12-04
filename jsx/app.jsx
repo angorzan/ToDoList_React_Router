@@ -1,5 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+    Router,
+    Route,
+    Link,
+    IndexLink,
+    IndexRoute,
+    hashHistory
+} from 'react-router';
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log("Domek załadowany!");
@@ -43,6 +51,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                onChange={this.handleChange} value={this.state.newtask}/>
                     </div>
                     <button className="addTaskButton btn btn-primary" onClick={this.handleClickAdd}>Add task</button>
+                    <ul>
+                        <li><Link to="/todo">To do</Link></li>
+                        <li><Link to="/done">Done </Link></li>
+                    </ul>
+
                 </div>
             )
         }
@@ -110,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return <li>
                 {this.props.item}
                 <button className="removeTaskButton btn btn-danger" onClick={this.handleClickToRemove}>Remove</button>
-                   </li>
+            </li>
         }
     }
 
@@ -192,22 +205,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    class ToDoAll extends React.Component {
+    class NotFound extends React.Component {
         render() {
-            return (
-
-                <div className="container">
-                    <ToDoListHeader/>
-                    <ToDoList/>
-                </div>
-
-            )
+            return <p>Nie znaleziono wróc do <Link to="/">strony głównej</Link></p>
         }
     }
 
     class App extends React.Component {
         render() {
-            return <ToDoAll/>
+            return (
+                <Router history={hashHistory}>
+                    <Route path='/' component={TaksToAdd}>
+                        <IndexRoute component={ToDoListHeader}/>
+                        <Route path='/todo' component={TasksToDo}/>
+                        <Route path='/done' component={TasksDone}/>
+                    </Route>
+                </Router>
+            )
+
         }
     }
 
