@@ -45,17 +45,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
             return (
                 <div>
-                    <div className="form-group">
+                    <div className="container form-group">
+                        <ToDoListHeader/>
                         <label className="col-sm-2 control-label">Name:</label>
                         <input className="form-control" type="text" placeholder="Place your task here"
                                onChange={this.handleChange} value={this.state.newtask}/>
-                    </div>
+
                     <button className="addTaskButton btn btn-primary" onClick={this.handleClickAdd}>Add task</button>
                     <ul>
                         <li><Link to="/todo">To do</Link></li>
                         <li><Link to="/done">Done </Link></li>
                     </ul>
-
+                    </div>
+                    { this.props.children }
                 </div>
             )
         }
@@ -63,12 +65,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     class TasksToDo extends React.Component {
         render() {
-            console.log('Tasks to do: ' + this.props.tasksTodo);
-
-            const listOfToDo = this.props.tasksTodo.map((item, i) => {
+            const tasksTodo = [];
+            console.log('Tasks to do: ' + tasksTodo);
+            const listOfToDo = tasksTodo.map((item, i) => {
                 return (
-                    <ToDoItem item={item} key={i} index={i} removeTask={this.props.removeTask}
-                              completeTask={this.props.completeTask}/>
+                    <ToDoItem item={item} key={i} index={i} />
                 )
             });
             return (
@@ -92,10 +93,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         render() {
-            console.log('Tasks done: ' + this.props.tasksDone);
-            const listOfDone = this.props.tasksDone.map((item, i) => {
+            const tasksDone = [];
+            console.log('Tasks done: ' + tasksDone);
+            const listOfDone = tasksDone.map((item, i) => {
                 return (
-                    <DoneItem item={item} key={i} index={i} removeDone={this.props.removeDone}/>
+                    <DoneItem item={item} key={i} index={i} />
                 )
             });
             return (
@@ -216,15 +218,19 @@ document.addEventListener('DOMContentLoaded', function () {
             return (
                 <Router history={hashHistory}>
                     <Route path='/' component={TaksToAdd}>
-                        <IndexRoute component={ToDoListHeader}/>
                         <Route path='/todo' component={TasksToDo}/>
                         <Route path='/done' component={TasksDone}/>
+                        <Route path='*' component={NotFound} />
+
                     </Route>
                 </Router>
             )
 
         }
     }
+
+
+
 
     ReactDOM.render(
         <App/>,
